@@ -24,7 +24,7 @@ namespace Geometry.Polygons
         public override float Area()
         {
             float s = Perimeter() / 2;
-            return (float) Math.Sqrt(s * (s - _vertexA.Length()) * (s - _vertexB.Length()) * (s * _vertexC.Length()));
+            return (float) Math.Sqrt(s * (s - _vertexA.Length()) * (s - _vertexB.Length()) * (s - _vertexC.Length()));
         }
 
         public override float Perimeter()
