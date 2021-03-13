@@ -16,7 +16,7 @@ namespace Geometry
                 new Rectangle(new Point(0, 0), new Point(2, 4)),
                 new Square(new Point(0, 0), new Point(2, 2)),
                 new Triangle(new Point(0, 0), new Point(0, 4), new Point(4, 0)),
-                new Parallelogram(new Point(0, 0), new Point(2, 3), new Point(6, 3), new Point(4, 0))
+                new Parallelogram(new Point(2, 3), new Point(6, 3), new Point(4, 0), new Point(0, 0))
             };
 
 

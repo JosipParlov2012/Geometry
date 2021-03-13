@@ -6,9 +6,9 @@ namespace Geometry.Polygons
     public class Triangle : Polygon
     {
         
-        private readonly Vertex _vertexA;
-        private readonly Vertex _vertexB;
-        private readonly Vertex _vertexC;
+        public Vertex VertexAB { get; }
+        public Vertex VertexBC { get; }
+        public Vertex VertexCA { get; }
 
         public Triangle(Point pointA, Point pointB, Point pointC)
         {
@@ -16,20 +16,20 @@ namespace Geometry.Polygons
             if (pointB.Equals(pointC)) throw new ArgumentException("B same as C");
             if (pointC.Equals(pointA)) throw new ArgumentException("C same as A");
 
-            _vertexA = new Vertex(pointB, pointC);
-            _vertexB = new Vertex(pointA, pointC);
-            _vertexC = new Vertex(pointA, pointB);
+            VertexAB = new Vertex(pointA, pointB);
+            VertexBC = new Vertex(pointB, pointC);
+            VertexCA = new Vertex(pointC, pointA);
         }
         
         public override float Area()
         {
             float s = Perimeter() / 2;
-            return (float) Math.Sqrt(s * (s - _vertexA.Length()) * (s - _vertexB.Length()) * (s - _vertexC.Length()));
+            return (float) Math.Sqrt(s * (s - VertexAB.Length()) * (s - VertexBC.Length()) * (s - VertexCA.Length()));
         }
 
         public override float Perimeter()
         {
-            return _vertexA.Length() + _vertexB.Length() + _vertexC.Length();
+            return VertexAB.Length() + VertexBC.Length() + VertexCA.Length();
         }
 
         /**
@@ -37,9 +37,9 @@ namespace Geometry.Polygons
          */
         public bool IsPythagorean()
         {
-            float a = _vertexA.Length();
-            float b = _vertexB.Length();
-            float c = _vertexC.Length();
+            float a = VertexAB.Length();
+            float b = VertexBC.Length();
+            float c = VertexCA.Length();
             return Util.IsPythagorean(a, b, c) || Util.IsPythagorean(a, c, b) || Util.IsPythagorean(b, c, a);
         }
 
@@ -48,7 +48,7 @@ namespace Geometry.Polygons
          */
         public bool IsEquilateral()
         {
-            return _vertexA.EqualLength(_vertexB) && _vertexB.EqualLength(_vertexC) && _vertexC.EqualLength(_vertexA);
+            return VertexAB.EqualLength(VertexBC) && VertexBC.EqualLength(VertexCA) && VertexCA.EqualLength(VertexAB);
         }
 
         /**
@@ -56,9 +56,9 @@ namespace Geometry.Polygons
          */
         public bool IsIsosceles()
         {
-            if (_vertexA.EqualLength(_vertexB) && !_vertexC.EqualLength(_vertexA) && !_vertexC.EqualLength(_vertexA)) return true;
-            if (_vertexA.EqualLength(_vertexC) && !_vertexB.EqualLength(_vertexA) && !_vertexB.EqualLength(_vertexC)) return true;
-            if (_vertexB.EqualLength(_vertexC) && !_vertexA.EqualLength(_vertexB) && !_vertexA.EqualLength(_vertexC)) return true;
+            if (VertexAB.EqualLength(VertexBC) && !VertexCA.EqualLength(VertexAB) && !VertexCA.EqualLength(VertexAB)) return true;
+            if (VertexAB.EqualLength(VertexCA) && !VertexBC.EqualLength(VertexAB) && !VertexBC.EqualLength(VertexCA)) return true;
+            if (VertexBC.EqualLength(VertexCA) && !VertexAB.EqualLength(VertexBC) && !VertexAB.EqualLength(VertexCA)) return true;
             return false;
         }
 

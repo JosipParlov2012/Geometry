@@ -11,9 +11,9 @@ namespace Geometry.Polygons
 
         public Parallelogram(Point pointA, Point pointB, Point pointC, Point pointD)
         {
-            _triangleA = new Triangle(pointD, pointA, pointC);
-            _triangleB = new Triangle(pointA, pointB, pointC);
-            
+            _triangleA = new Triangle(pointA, pointB, pointC);
+            _triangleB = new Triangle(pointA, pointD, pointC);
+
             if (Util.FloatEquals(_triangleA.Perimeter(), _triangleB.Perimeter())) return;
             if (_triangleA.IsEquilateral() && _triangleB.IsEquilateral()) return;
             throw new ArgumentException("not quadrilateral");
